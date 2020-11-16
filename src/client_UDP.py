@@ -55,7 +55,7 @@ def main():
         exit(1)
 
     server_address = (ip, port)
-    n_times = int(input('Digite a quantidade de vezes que deseja fazer um ping-pong: '))
+    n_times = int(input('Type the amount of times you want to ping-pong: '))
 
     # Round Trip Time array
     rtts = ping_pong(server_address, n_times)
