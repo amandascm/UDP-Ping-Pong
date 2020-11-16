@@ -32,7 +32,7 @@ def ping_pong(addr, n_times):
             recvd_at = time.time_ns()
             rtt = recvd_at - sent_at
             rtts.append(rtt)
-            print("RTT: ", rtt, "\n")
+            print("RTT: ", rtt, "ns\n")
 
         except socket.timeout:
             # Receive nothing
