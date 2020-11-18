@@ -1,14 +1,11 @@
 import socket
 import sys
 import math
+import random
 
 def ping_pong(addr, taxa):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(addr)
-
-    # Receive n_times from client to calculate packet loss
-    n_times, address = s.recvfrom(4096)
-    dont_lose = math.floor(float(n_times)*(1 - taxa))
     
     i = 0
     while True:
@@ -21,12 +18,14 @@ def ping_pong(addr, taxa):
             print('Closing connection...')
             break
 
-        # Artificially lose packets by not sending them
-        if (i < dont_lose):
+        # Probabilistically lose packets by not sending them
+        randomValue = random.uniform(0.0, 1.0)
+        if (randomValue <= (1.0 - taxa)):
             send_data = "pong"
             s.sendto(send_data.encode('utf-8'), address)
-        i += 1
-        print("Server sent: ", send_data,"\n\n")
+            print("Server sent: ", send_data,"\n\n")
+
+        i += 1        
     
     # Close the socket
     s.close()
