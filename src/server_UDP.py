@@ -13,11 +13,6 @@ def ping_pong(addr, taxa):
         data, address = s.recvfrom(4096)
         print("Server received: ", data.decode('utf-8'), "\n")
 
-        # Check if the server should end connection
-        if data.decode('utf-8') == 'end connection':
-            print('Closing connection...')
-            break
-
         # Probabilistically lose packets by not sending them
         randomValue = random.uniform(0.0, 1.0)
         if (randomValue <= (1.0 - taxa)):

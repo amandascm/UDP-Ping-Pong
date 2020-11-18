@@ -37,9 +37,6 @@ def ping_pong(addr, n_times):
             print("Timeout!!! Try again... \n")
             continue
 
-    #Send 'finish' message to server
-    s.sendto('end connection'.encode('utf-8'), addr)
-
     # Close the socket
     s.close()
 
