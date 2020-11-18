@@ -9,17 +9,23 @@ def ping_pong(addr, taxa):
     # Receive n_times from client to calculate packet loss
     n_times, address = s.recvfrom(4096)
     dont_lose = math.floor(float(n_times)*(1 - taxa))
-
-    for i in range(int(n_times)):
+    
+    i = 0
+    while True:
         print("------- Server is listening -------\n")
         data, address = s.recvfrom(4096)
         print("Server received: ", data.decode('utf-8'), "\n")
+
+        # Check if the server should end connection
+        if data.decode('utf-8') == 'end connection':
+            print('Closing connection...')
+            break
 
         # Artificially lose packets by not sending them
         if (i < dont_lose):
             send_data = "pong"
             s.sendto(send_data.encode('utf-8'), address)
-        
+        i += 1
         print("Server sent: ", send_data,"\n\n")
     
     # Close the socket
