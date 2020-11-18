@@ -10,9 +10,6 @@ def ping_pong(addr, n_times):
 
     rtts = []
 
-    # Send n_times to server so it can calculate packet loss
-    s.sendto(str(n_times).encode('utf-8'), addr)
-
     # Send data through UDP protocol n times
     for i in range(n_times):
         # Send ping
