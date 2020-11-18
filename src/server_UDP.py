@@ -7,7 +7,6 @@ def ping_pong(addr, taxa):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.bind(addr)
     
-    i = 0
     while True:
         print("------- Server is listening -------\n")
         data, address = s.recvfrom(4096)
@@ -18,9 +17,7 @@ def ping_pong(addr, taxa):
         if (randomValue <= (1.0 - taxa)):
             send_data = "pong"
             s.sendto(send_data.encode('utf-8'), address)
-            print("Server sent: ", send_data,"\n\n")
-
-        i += 1        
+            print("Server sent: ", send_data,"\n\n")  
     
     # Close the socket
     s.close()
